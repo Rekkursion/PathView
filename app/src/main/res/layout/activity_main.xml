@@ -10,7 +10,7 @@
 
     <com.rekkursion.pathview.PathView
             android:id="@+id/path_view"
-            app:is_indicator="true"
+            app:is_indicator="false"
             app:text_height="20"
             app:separator=">"
             app:node_text_color="@color/colorPrimaryDark"

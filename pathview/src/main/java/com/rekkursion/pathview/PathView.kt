@@ -14,26 +14,27 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
 
     // is indicator or not
     private var mIsIndicator: Boolean = false
-    val isIndicator get() = mIsIndicator
+    var isIndicator get() = mIsIndicator; set(value) { mIsIndicator = value }
 
     // the height of this path-view
     private var mHeight: Int = 20
-    val viewHeight get() = mHeight
+    var viewHeight get() = mHeight; set(value) { mHeight = value }
 
     // the text of the separator
     private var mSeparatorStr: String = "/"
-    val separator get() = mSeparatorStr
+    var separator get() = mSeparatorStr; set(value) { mSeparatorStr = value }
 
     // the color of the node string
     private var mNodeColor: Int = Color.BLACK
-    val nodeTextColor get() = mNodeColor
+    var nodeTextColor get() = mNodeColor; set(value) { mNodeColor = value }
 
     // the color of the separator
     private var mSeparatorColor: Int = Color.GRAY
-    val separatorColor get() = mSeparatorColor
+    var separatorColor get() = mSeparatorColor; set(value) { mSeparatorColor = value }
 
     // if the user'd like to put a single separator when there's nothing
     private var mPutSingleSeparatorWhenNothing: Boolean = true
+    var putSingleSeparatorWhenNothing get() = mPutSingleSeparatorWhenNothing; set(value) { mPutSingleSeparatorWhenNothing = value }
 
     // the listener when clicking the path node string
     private var mOnPathNodeClickListener: OnPathNodeClickListener? = null
