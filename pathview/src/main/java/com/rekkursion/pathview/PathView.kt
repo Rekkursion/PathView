@@ -12,6 +12,10 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
     // the container for putting path-node-views
     private val mLlyNodesContainer: LinearLayoutCompat
 
+    // is indicator or not
+    private var mIsIndicator: Boolean = false
+    val isIndicator get() = mIsIndicator
+
     // the height of this path-view
     private var mHeight: Int = 20
     val viewHeight get() = mHeight
@@ -48,6 +52,7 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
         attrs?.let {
             val ta = context.obtainStyledAttributes(attrs, R.styleable.PathView)
 
+            mIsIndicator = ta.getBoolean(R.styleable.PathView_is_indicator, false)
             mHeight = max(8, ta.getInteger(R.styleable.PathView_text_height, 20))
             mSeparatorStr = ta.getString(R.styleable.PathView_separator) ?: "/"
             mNodeColor = ta.getColor(R.styleable.PathView_node_text_color, Color.BLACK)
@@ -65,6 +70,7 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
 
     // push a path node to the tail
     fun push(pathNodeString: String) {
+        // the passed string is empty -> return
         if (pathNodeString.isEmpty() && mLlyNodesContainer.childCount > 0) return
 
         // if there's a single separator w/o the node string
@@ -82,8 +88,10 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
                 .setOnPathNodeClickListener(object: OnDefaultPathClickListener {
                     override fun onPathNodeClick() {
                         // do the default things
-                        while (mLlyNodesContainer.childCount > childCnt + 1)
-                            mLlyNodesContainer.removeViewAt(mLlyNodesContainer.childCount - 1)
+                        if (!mIsIndicator)
+                            while (mLlyNodesContainer.childCount > childCnt + 1)
+                                mLlyNodesContainer.removeViewAt(mLlyNodesContainer.childCount - 1)
+
                         // do the things user'd like to do
                         mOnPathNodeClickListener?.onPathNodeClick(this@PathView, childCnt)
                     }
@@ -96,6 +104,7 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
 
     // push all path nodes to the tail
     fun pushAll(pathNodeStrings: ArrayList<String>) {
+        // push all
         pathNodeStrings.forEach { pathNodeString -> push(pathNodeString) }
     }
 

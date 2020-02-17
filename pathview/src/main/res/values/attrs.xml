@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PathView">
+        <!-- is the indicator or not -->
+        <attr name="is_indicator" format="boolean" />
         <!-- the height of this path-view -->
         <attr name="text_height" format="integer" />
         <!-- the text of the separator -->
