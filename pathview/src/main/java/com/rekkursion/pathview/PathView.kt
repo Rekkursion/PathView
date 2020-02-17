@@ -94,6 +94,11 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
         }
     }
 
+    // push all path nodes to the tail
+    fun pushAll(pathNodeStrings: ArrayList<String>) {
+        pathNodeStrings.forEach { pathNodeString -> push(pathNodeString) }
+    }
+
     // pop a path node from the tail
     fun pop(): String? {
         if (mLlyNodesContainer.childCount > 0) {
