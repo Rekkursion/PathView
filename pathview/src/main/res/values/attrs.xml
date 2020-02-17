@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PathView">
+        <!-- the height of this path-view -->
+        <attr name="text_height" format="integer" />
+        <!-- the text of the separator -->
+        <attr name="separator" format="string" />
+        <!-- the color of the node string -->
+        <attr name="node_text_color" format="reference|color" />
+        <!-- the color of the separator -->
+        <attr name="separator_color" format="reference|color" />
+        <!-- if the user'd like to put a single separator when there's nothing -->
+        <attr name="put_single_separator_when_nothing" format="boolean" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <com.rekkursion.pathview.PathView
+            android:id="@+id/path_view"
+            app:text_height="20"
+            app:separator=">"
+            app:node_text_color="@color/colorPrimaryDark"
+            app:separator_color="@color/colorPrimary"
+            app:put_single_separator_when_nothing="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <Button
+            android:id="@+id/btn_push_node"
+            android:text="Push"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    <Button
+            android:id="@+id/btn_pop_node"
+            android:text="Pop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    <Button
+            android:id="@+id/btn_clear_nodes"
+            android:text="Clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>

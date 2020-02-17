@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PathView</string>
+    <string name="str_default_separator">/</string>
+</resources>

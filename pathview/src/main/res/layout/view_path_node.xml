@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- for showing the text-separator -->
+    <TextView
+        android:id="@+id/txtv_separator"
+        android:text="@string/str_default_separator"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:layout_marginStart="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- for showing the drawable-separator -->
+    <ImageView
+        android:id="@+id/imgv_separator"
+        android:contentDescription="@string/str_default_separator"
+        android:visibility="gone"
+        android:layout_marginStart="6dp"
+        android:layout_width="24sp"
+        android:layout_height="24sp" />
+
+    <!-- for placing the string of a certain path node -->
+    <TextView
+        android:id="@+id/txtv_node_string"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:layout_marginStart="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>
