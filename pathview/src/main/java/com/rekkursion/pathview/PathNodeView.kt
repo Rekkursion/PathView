@@ -79,9 +79,11 @@ internal class PathNodeView private constructor(context: Context, attrs: Attribu
 
     // for placing the string of a certain path node
     private val mTxtvNodeStr: TextView
+    var nodeString: String get() = mTxtvNodeStr.text.toString(); set(value) { mTxtvNodeStr.text = value }
 
     // for showing the text-separator
     private val mTxtvSeparator: TextView
+    var separator: String get() = mTxtvSeparator.text.toString(); set(value) { mTxtvSeparator.text = value }
 
     // for showing the drawable-separator
     private val mImgvSeparator: ImageView
@@ -104,9 +106,20 @@ internal class PathNodeView private constructor(context: Context, attrs: Attribu
 
     /* =================================================================== */
 
-    // get the path node string
-    internal fun getNodeString(): String = mTxtvNodeStr.text.toString()
+    // set the height
+    internal fun setViewHeight(height: Int) {
+        mTxtvNodeStr.textSize = height.toFloat()
+        mTxtvSeparator.textSize = height.toFloat()
+        mImgvSeparator.layoutParams.height = height
+    }
 
-    // set the path node string
-    internal fun setNodeString(pathNodeString: String) { mTxtvNodeStr.text = pathNodeString }
+    // set the node string color
+    internal fun setNodeColor(color: Int) {
+        mTxtvNodeStr.setTextColor(color)
+    }
+
+    // set the separator color
+    internal fun setSeparatorColor(color: Int) {
+        mTxtvSeparator.setTextColor(color)
+    }
 }

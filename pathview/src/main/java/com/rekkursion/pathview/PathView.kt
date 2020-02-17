@@ -6,6 +6,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.children
+import androidx.core.view.forEach
+import androidx.core.view.get
 import kotlin.math.max
 
 class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompat(context, attrs) {
@@ -18,19 +20,31 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
 
     // the height of this path-view
     private var mHeight: Int = 20
-    var viewHeight get() = mHeight; set(value) { mHeight = value }
+    var viewHeight get() = mHeight; set(value) {
+        mHeight = value
+        mLlyNodesContainer.children.forEach { (it as PathNodeView).setViewHeight(mHeight) }
+    }
 
     // the text of the separator
     private var mSeparatorStr: String = "/"
-    var separator get() = mSeparatorStr; set(value) { mSeparatorStr = value }
+    var separator get() = mSeparatorStr; set(value) {
+        mSeparatorStr = value
+        mLlyNodesContainer.children.forEach { (it as PathNodeView).separator = mSeparatorStr }
+    }
 
     // the color of the node string
     private var mNodeColor: Int = Color.BLACK
-    var nodeTextColor get() = mNodeColor; set(value) { mNodeColor = value }
+    var nodeTextColor get() = mNodeColor; set(value) {
+        mNodeColor = value
+        mLlyNodesContainer.children.forEach { (it as PathNodeView).setNodeColor(mNodeColor) }
+    }
 
     // the color of the separator
     private var mSeparatorColor: Int = Color.GRAY
-    var separatorColor get() = mSeparatorColor; set(value) { mSeparatorColor = value }
+    var separatorColor get() = mSeparatorColor; set(value) {
+        mSeparatorColor = value
+        mLlyNodesContainer.children.forEach { (it as PathNodeView).setSeparatorColor(mSeparatorColor) }
+    }
 
     // if the user'd like to put a single separator when there's nothing
     private var mPutSingleSeparatorWhenNothing: Boolean = true
@@ -75,8 +89,10 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
         if (pathNodeString.isEmpty() && mLlyNodesContainer.childCount > 0) return
 
         // if there's a single separator w/o the node string
-        if (mLlyNodesContainer.childCount == 1 && (mLlyNodesContainer.getChildAt(0) as PathNodeView).getNodeString().isEmpty())
-            (mLlyNodesContainer.getChildAt(0) as PathNodeView).setNodeString(pathNodeString)
+        if (mLlyNodesContainer.childCount == 1 && (mLlyNodesContainer.getChildAt(0) as PathNodeView).nodeString.isEmpty()) {
+            (mLlyNodesContainer.getChildAt(0) as PathNodeView).nodeString = pathNodeString
+            (mLlyNodesContainer.getChildAt(0) as PathNodeView).separator = mSeparatorStr
+        }
 
         // general case
         else {
@@ -115,11 +131,11 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
             val last = mLlyNodesContainer.children.last()
 
             last as PathNodeView
-            if (last.getNodeString().isEmpty()) return null
+            if (last.nodeString.isEmpty()) return null
 
-            val retStr = last.getNodeString()
+            val retStr = last.nodeString
             if (mLlyNodesContainer.childCount == 1 && mPutSingleSeparatorWhenNothing)
-                last.setNodeString("")
+                last.nodeString = ""
             else
                 mLlyNodesContainer.removeView(last)
 
@@ -132,7 +148,7 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
     fun clear() {
         if (mPutSingleSeparatorWhenNothing) {
             mLlyNodesContainer.removeViews(1, mLlyNodesContainer.childCount - 1)
-            (mLlyNodesContainer.getChildAt(0) as PathNodeView).setNodeString("")
+            (mLlyNodesContainer.getChildAt(0) as PathNodeView).nodeString = ""
         }
         else
             mLlyNodesContainer.removeAllViews()
@@ -145,7 +161,6 @@ class PathView(context: Context, attrs: AttributeSet? = null): LinearLayoutCompa
 
     // get all current path nodes
     fun getAllPathNodes(): ArrayList<String> = mLlyNodesContainer.children.map {
-        it as PathNodeView
-        it.getNodeString()
+        (it as PathNodeView).nodeString
     }.toCollection(ArrayList())
 }
